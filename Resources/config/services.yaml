@@ -1,0 +1,25 @@
+services:
+    MKebza\Notificator\Handler\NotificationHandlerRegistry: ~
+    MKebza\Notificator\Service\TargetNormalizer: ~
+
+    MKebza\Notificator\Notificator:
+        arguments:
+            $targetNormalizer: '@MKebza\Notificator\Service\TargetNormalizer'
+            $handlerRegistry: '@MKebza\Notificator\Handler\NotificationHandlerRegistry'
+            $notificationRegistry: '@MKebza\Notificator\Service\NotificationRegistry'
+            $dispatcher: '@Symfony\Component\EventDispatcher\EventDispatcherInterface'
+
+    MKebza\Notificator\Service\NotificationRegistry:
+        arguments:
+            $locator: '@mkebza_notificator.notification_locator'
+
+    mkebza_notificator.notification_locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+
+
+    # Handlers
+    MKebza\Notificator\Handler\Type\SwiftMailerHandler:
+        arguments:
+            $mailer: '@mailer'
+
