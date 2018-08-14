@@ -1,0 +1,21 @@
+{
+    "name": "mkebza/notificator-bundle",
+    "description": "Symfony bundle for handling notification to user through different handlers",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marek Kebza",
+            "email": "marek@kebza.cz"
+        }
+    ],
+    "autoload": {
+      "psr-4": { "MKebza\\Notificator\\": "" },
+      "exclude-from-classmap": [
+        "/Tests/"
+      ]
+    },
+    "require": {
+       "php": "^7.1.3"
+    }
+}
