@@ -1,5 +1,8 @@
 # NotificatorBundle
 
+[![Build Status](https://travis-ci.org/mkebza/NotificatorBundle.svg?branch=master)](https://travis-ci.org/mkebza/NotificatorBundle)
+
+
 This is simple bundle to manage notifications though different channels.
 
 ## Installation
