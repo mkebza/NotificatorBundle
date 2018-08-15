@@ -55,14 +55,6 @@ final class PostNotificationHandleEvent extends Event
     }
 
     /**
-     * @param Notification $notification
-     */
-    public function setNotification(Notification $notification): void
-    {
-        $this->notification = $notification;
-    }
-
-    /**
      * @return NotificationInterface
      */
     public function getNotificationHandler(): NotificationInterface
@@ -71,26 +63,10 @@ final class PostNotificationHandleEvent extends Event
     }
 
     /**
-     * @param NotificationInterface $notificationHandler
-     */
-    public function setNotificationHandler(NotificationInterface $notificationHandler): void
-    {
-        $this->notificationHandler = $notificationHandler;
-    }
-
-    /**
      * @return array
      */
     public function getOptions(): array
     {
         return $this->options;
-    }
-
-    /**
-     * @param array $options
-     */
-    public function setOptions(array $options): void
-    {
-        $this->options = $options;
     }
 }

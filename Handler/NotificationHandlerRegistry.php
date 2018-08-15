@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace MKebza\Notificator\Handler;
 
+use MKebza\Notificator\Exception\NotificationHandlerNotFoundException;
+
 class NotificationHandlerRegistry implements NotificationHandlerRegistryInterface
 {
     /**
@@ -25,6 +27,15 @@ class NotificationHandlerRegistry implements NotificationHandlerRegistryInterfac
 
     public function get(string $name): NotificationHandlerInterface
     {
+        if (!$this->has($name)) {
+            throw new NotificationHandlerNotFoundException(sprintf("Can't find notification handler %s", $name));
+        }
+
         return $this->handlers[$name];
+    }
+
+    public function has(string $name): bool
+    {
+        return isset($this->handlers[$name]);
     }
 }
