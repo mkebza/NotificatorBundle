@@ -13,12 +13,11 @@
 
     <testsuites>
         <testsuite name="Notificator Test suite">
-            <directory>tests/</directory>
+            <directory>Tests/</directory>
         </testsuite>
     </testsuites>
 
-
-     <listeners>
+    <listeners>
     <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
 </listeners>
 </phpunit>
