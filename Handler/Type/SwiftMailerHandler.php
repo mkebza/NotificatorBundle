@@ -46,7 +46,7 @@ class SwiftMailerHandler implements NotificationHandlerInterface
                 'from_email' => 'foo@bar.com',
                 'subject_attach' => null,
             ])
-            ->setAllowedTypes('subject_attach', ['string', null])
+            ->setAllowedTypes('subject_attach', ['string', 'null'])
             ->setAllowedTypes('from_name', ['string'])
             ->setAllowedTypes('from_email', ['string']);
 
