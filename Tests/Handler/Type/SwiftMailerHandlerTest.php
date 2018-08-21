@@ -43,9 +43,10 @@ class SwiftMailerHandlerTest extends TestCase
             ->with($this->isInstanceOf(\Swift_Message::class));
 
         $handler = new SwiftMailerHandler($mailerMock);
-        $handler->configure(['from_name' => 'Foo', 'from_email' => 'bar@foo.com']);
+        $handler->configure(['from_name' => 'Foo', 'from_email' => 'bar@foo.com', 'subject_attach' => ' - MyAPP']);
 
         $messageMock = $this->createMock(\Swift_Message::class);
+
         $messageMock
             ->expects($this->once())
             ->method('setTo')
@@ -54,6 +55,15 @@ class SwiftMailerHandlerTest extends TestCase
             ->expects($this->once())
             ->method('setFrom')
             ->with(['bar@foo.com' => 'Foo']);
+
+        // Subject
+        $messageMock
+            ->method('getSubject')
+            ->willReturn('MySubject');
+        $messageMock
+            ->expects($this->once())
+            ->method('setSubject')
+            ->with('MySubject - MyAPP');
 
         $notification = new Notification('foo@bar.com', 'email');
         $notification->setContent($messageMock);

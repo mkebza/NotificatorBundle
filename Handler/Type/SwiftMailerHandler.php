@@ -44,7 +44,9 @@ class SwiftMailerHandler implements NotificationHandlerInterface
             ->setDefaults([
                 'from_name' => 'FooBar',
                 'from_email' => 'foo@bar.com',
+                'subject_attach' => null,
             ])
+            ->setAllowedTypes('subject_attach', ['string', null])
             ->setAllowedTypes('from_name', ['string'])
             ->setAllowedTypes('from_email', ['string']);
 
@@ -65,6 +67,10 @@ class SwiftMailerHandler implements NotificationHandlerInterface
 
         if (empty($message->getFrom())) {
             $message->setFrom([$this->default['from_email'] => $this->default['from_name']]);
+        }
+
+        if (null !== $this->default['subject_attach']) {
+            $message->setSubject($message->getSubject().$this->default['subject_attach']);
         }
 
         $this->mailer->send($message);
