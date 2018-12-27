@@ -9,6 +9,8 @@ services:
             $notificationRegistry: '@MKebza\Notificator\Service\NotificationRegistry'
             $dispatcher: '@Symfony\Component\EventDispatcher\EventDispatcherInterface'
 
+    MKebza\Notificator\NotificatorInterface: '@MKebza\Notificator\Notificator'
+
     MKebza\Notificator\Service\NotificationRegistry:
         arguments:
             $locator: '@mkebza_notificator.notification_locator'
