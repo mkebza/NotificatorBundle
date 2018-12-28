@@ -78,14 +78,14 @@ class Notificator implements NotificatorInterface
                 $notification = new Notification($subscribed[$channelName], $channelName);
 
                 $this->dispatcher->dispatch(PreNotificationHandleEvent::class, new PreNotificationHandleEvent(
-                    $notification, $notificationHandler, $options
+                    $notification, $notificationHandler, $options, $target
                 ));
 
                 $notificationHandler->{$channelName}($notification, $options);
                 $this->handlerRegistry->get($channelName)->handle($notification);
 
                 $this->dispatcher->dispatch(PostNotificationHandleEvent::class, new PostNotificationHandleEvent(
-                    $notification, $notificationHandler, $options
+                    $notification, $notificationHandler, $options, $target
                 ));
             }
         }

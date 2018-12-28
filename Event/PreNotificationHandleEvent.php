@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MKebza\Notificator\Event;
 
+use MKebza\Notificator\NotifiableInterface;
 use MKebza\Notificator\Notification;
 use MKebza\Notificator\NotificationInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -33,17 +34,23 @@ final class PreNotificationHandleEvent extends Event
     private $options;
 
     /**
+     * @var NotifiableInterface
+     */
+    private $target;
+
+    /**
      * PreNotificationHandleEvent constructor.
      *
      * @param Notification          $notification
      * @param NotificationInterface $notificationHandler
      * @param array                 $options
      */
-    public function __construct(Notification $notification, NotificationInterface $notificationHandler, array $options)
+    public function __construct(Notification $notification, NotificationInterface $notificationHandler, array $options, NotifiableInterface $target)
     {
         $this->notification = $notification;
         $this->notificationHandler = $notificationHandler;
         $this->options = $options;
+        $this->target = $target;
     }
 
     /**
@@ -69,4 +76,14 @@ final class PreNotificationHandleEvent extends Event
     {
         return $this->options;
     }
+
+    /**
+     * @return NotifiableInterface
+     */
+    public function getTarget(): NotifiableInterface
+    {
+        return $this->target;
+    }
+    
+    
 }
