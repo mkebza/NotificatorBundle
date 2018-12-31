@@ -40,10 +40,11 @@ final class PostNotificationHandleEvent extends Event
 
     /**
      * PostNotificationHandleEvent constructor.
-     * @param Notification $notification
+     *
+     * @param Notification          $notification
      * @param NotificationInterface $notificationHandler
-     * @param array $options
-     * @param NotifiableInterface $target
+     * @param array                 $options
+     * @param NotifiableInterface   $target
      */
     public function __construct(
         Notification $notification,
@@ -57,7 +58,6 @@ final class PostNotificationHandleEvent extends Event
         $this->target = $target;
     }
 
-
     /**
      * @return NotifiableInterface
      */
@@ -65,7 +65,6 @@ final class PostNotificationHandleEvent extends Event
     {
         return $this->target;
     }
-    
 
     /**
      * @return Notification

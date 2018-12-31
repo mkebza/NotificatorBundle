@@ -84,6 +84,4 @@ final class PreNotificationHandleEvent extends Event
     {
         return $this->target;
     }
-    
-    
 }

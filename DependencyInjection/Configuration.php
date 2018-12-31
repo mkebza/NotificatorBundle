@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('scheduled_key_registry')->defaultValue('MKebza\Notificator\Scheduled\KeyRegistry\MemoryScheduledKeyRegistry')->end()
                 ->arrayNode('handlers')
                     ->useAttributeAsKey('name')
                     ->arrayPrototype()

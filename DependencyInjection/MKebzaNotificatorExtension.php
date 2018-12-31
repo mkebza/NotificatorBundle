@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace MKebza\Notificator\DependencyInjection;
 
 use MKebza\Notificator\Handler\NotificationHandlerRegistry;
+use MKebza\Notificator\Scheduled\ScheduledGroupInterface;
+use MKebza\Notificator\Scheduled\ScheduledNotificator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -35,6 +37,14 @@ class MKebzaNotificatorExtension extends Extension
 
         $config = $this->processConfiguration(new Configuration(), $configs);
         $this->registerHandlers($config['handlers'], $container);
+
+        $container
+            ->getDefinition(ScheduledNotificator::class)
+            ->setArgument('$keyRegistry', new Reference($config['scheduled_key_registry']));
+
+        $container
+            ->registerForAutoconfiguration(ScheduledGroupInterface::class)
+            ->addTag('mkebza_notificator.scheduled_group');
     }
 
     protected function registerHandlers(array $handlers, ContainerBuilder $container): void

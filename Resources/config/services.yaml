@@ -19,6 +19,30 @@ services:
         class: Symfony\Component\DependencyInjection\ServiceLocator
         tags: ['container.service_locator']
 
+    MKebza\Notificator\Scheduled\ScheduledGroupRegistry:
+        arguments:
+            $groups: !tagged 'mkebza_notificator.scheduled_group'
+
+    MKebza\Notificator\Scheduled\KeyRegistry\DoctrineScheduledKeyRegistry:
+        arguments:
+            $em: '@doctrine.orm.default_entity_manager'
+
+    MKebza\Notificator\Scheduled\KeyRegistry\MemoryScheduledKeyRegistry: ~
+
+    # Scheduled
+    MKebza\Notificator\Scheduled\ScheduledNotificator:
+        arguments:
+            $notificator: '@MKebza\Notificator\Notificator'
+            $notificationRegistry: '@MKebza\Notificator\Service\NotificationRegistry'
+#            $keyRegistry: '@MKebza\Notificator\Scheduled\KeyRegistry\DoctrineScheduledKeyRegistry' # added in compiler pass
+            $scheduledGroupRegistry: '@MKebza\Notificator\Scheduled\ScheduledGroupRegistry'
+            $dispatcher: '@event_dispatcher'
+
+    MKebza\Notificator\Command\ProcessScheduledNotificationsComand:
+        arguments:
+            $notificator: '@MKebza\Notificator\Scheduled\ScheduledNotificator'
+            $dispatcher: '@event_dispatcher'
+        tags: ['console.command']
 
     # Handlers
     MKebza\Notificator\Handler\Type\SwiftMailerHandler:
